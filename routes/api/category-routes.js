@@ -7,10 +7,7 @@ router.get('/', async (req, res) => {
   // find all categories
   // be sure to include its associated Products
   const catData = await Category.findAll({
-    include: {
-      model: Product,
-      attributes: ['id', 'product_name', 'price', 'stock', 'category_id' ]
-    }
+    include: [Product]
   });
   if(!catData) {
     res.status(404).json({message: 'No categories were found.'});
@@ -26,10 +23,7 @@ router.get('/:id', async (req, res) => {
     where: {
       id: req.params.id
     },
-    include: {
-      model: Product,
-      attributes: ['id', 'product_name', 'price', 'stock', 'category_id' ]
-    }
+      include: [Product]
   });
   if(!catData) {
     res.status(404).json({message: 'No categories were found.'});
